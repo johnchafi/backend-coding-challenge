@@ -1,16 +1,11 @@
 package com.coveo.challenge.math;
 
-import com.coveo.challenge.io.Point;
-
 import static java.lang.Math.*;
 
 
 public class DistanceCalculator {
 
     private static final double EARTH_RADIUS_IN_KM = 6371.0;
-
-    // Haversine formula
-    // Vincenty formula
 
     // Haversine formula
     // http://www.movable-type.co.uk/scripts/latlong.html

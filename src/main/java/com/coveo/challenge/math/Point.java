@@ -1,4 +1,4 @@
-package com.coveo.challenge.io;
+package com.coveo.challenge.math;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,5 @@
 package com.coveo.challenge.math;
 
-import com.coveo.challenge.io.Point;
 import org.junit.Before;
 import org.junit.Test;
 
