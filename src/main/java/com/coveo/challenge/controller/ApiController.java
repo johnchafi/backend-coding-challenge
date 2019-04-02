@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ApiController {
 
-    @RequestMapping(value = "/suggestions", method = RequestMethod.GET)
+    @RequestMapping(value = "/g", method = RequestMethod.GET)
     public ResponseEntity<String> getSuggestions(@RequestParam(value = "q") String query,
                                                  @RequestParam(value = "longitude", required =  false) Double longitude,
                                                  @RequestParam(value = "latitude", required = false) Double latitude) {
