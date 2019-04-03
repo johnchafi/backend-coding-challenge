@@ -1,8 +1,11 @@
 package com.coveo.challenge.math;
 
+import com.coveo.challenge.model.Point;
+import org.springframework.stereotype.Component;
+
 import static java.lang.Math.*;
 
-
+@Component
 public class DistanceCalculator {
 
     private static final double EARTH_RADIUS_IN_KM = 6371.0;

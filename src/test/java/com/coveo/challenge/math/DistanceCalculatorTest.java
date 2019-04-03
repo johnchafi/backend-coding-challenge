@@ -1,5 +1,6 @@
 package com.coveo.challenge.math;
 
+import com.coveo.challenge.model.Point;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +16,7 @@ public class DistanceCalculatorTest {
     }
 
     @Test
-    public void whenCalcule_givenStartAndEnd_thenReturnExpectedDistance() {
+    public void whenCalculate_givenStartAndEnd_thenReturnExpectedDistance() {
         Point start = point(50.345, -113.3867);
         Point end = point(51.25789, -115.75607);
 
