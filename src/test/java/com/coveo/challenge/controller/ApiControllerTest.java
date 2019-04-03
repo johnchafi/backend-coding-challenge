@@ -28,12 +28,12 @@ public class ApiControllerTest {
     @Test
     public void whenGetSuggestions_givenParams_thenShouldCallSuggestionsService() {
         Suggestions expected = Suggestions.builder().build();
-        when(suggestionsService.search(ANY_QUERY, ANY_LATITUDE, ANY_LONGITUDE)).thenReturn(expected);
+        when(suggestionsService.call(ANY_QUERY, ANY_LATITUDE, ANY_LONGITUDE)).thenReturn(expected);
 
         Suggestions actual = underTest.getSuggestions(ANY_QUERY, ANY_LATITUDE, ANY_LONGITUDE);
 
         assertThat(actual).isEqualTo(expected);
-        verify(suggestionsService).search(ANY_QUERY, ANY_LATITUDE, ANY_LONGITUDE);
+        verify(suggestionsService).call(ANY_QUERY, ANY_LATITUDE, ANY_LONGITUDE);
     }
 }
 

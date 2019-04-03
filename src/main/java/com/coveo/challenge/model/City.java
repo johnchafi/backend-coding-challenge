@@ -18,4 +18,10 @@ public class City {
     private Point geographicalCoordinates;
 
     private String country;
+
+    private Double nameScore;
+
+    private Double alternateNamesScore; // 90%
+
+    private Double distanceScore;
 }

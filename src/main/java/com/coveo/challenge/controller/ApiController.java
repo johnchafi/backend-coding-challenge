@@ -20,6 +20,6 @@ public class ApiController {
     public Suggestions getSuggestions(@RequestParam(value = "q") String query,
                                                       @RequestParam(value = "latitude", required = false) Double latitude,
                                                       @RequestParam(value = "longitude", required =  false) Double longitude) {
-      return suggestionsService.search(query, latitude, longitude);
+      return suggestionsService.call(query, latitude, longitude);
     }
 }
