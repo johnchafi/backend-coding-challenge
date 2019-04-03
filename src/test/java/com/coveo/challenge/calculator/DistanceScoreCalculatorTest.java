@@ -1,4 +1,4 @@
-package com.coveo.challenge.math;
+package com.coveo.challenge.calculator;
 
 import com.coveo.challenge.model.Point;
 import org.junit.Before;
