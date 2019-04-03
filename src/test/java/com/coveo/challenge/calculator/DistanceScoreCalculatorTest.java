@@ -5,31 +5,33 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.apache.commons.math3.util.Precision.round;
 
-public class DistanceCalculatorTest {
+public class DistanceScoreCalculatorTest {
 
-    private DistanceCalculator underTest;
+    private DistanceScoreCalculator underTest;
 
     @Before
     public void setUp() {
-        underTest = new DistanceCalculator();
+        underTest = new DistanceScoreCalculator();
     }
 
     @Test
     public void whenCalculate_givenStartAndEnd_thenReturnExpectedDistance() {
-        Point start = point(50.345, -113.3867);
-        Point end = point(51.25789, -115.75607);
+        // https://www.vcalc.com/wiki/vCalc/Haversine+-+Distance
+        // 1 - (231.850382 / 6371.0)
+        Point start = new Point(45.508889, -73.561667);
+        Point end = new Point(46.816667, -71.216667);
 
-        double expected = 195.0;
+        double expected = round(1 - (231.850382 / 50.0), 2);
+
         double actual = underTest.calculate(start, end);
 
         assertThat(actual).isEqualTo(expected);
     }
 
     private Point point(double latitude, double longitude) {
-        return Point.builder()
-                .latitude(latitude)
-                .longitude(longitude).build();
+        return new Point(latitude, longitude);
     }
 
 
