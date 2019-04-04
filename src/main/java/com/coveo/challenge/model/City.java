@@ -21,7 +21,7 @@ public class City {
 
     private Double nameScore;
 
-    private Double alternateNamesScore; // 90%
+    private Double alternateNamesScore;
 
     private Double distanceScore;
 }
