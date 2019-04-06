@@ -2,16 +2,14 @@ package com.coveo.challenge.calculator;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.commons.math3.util.Precision.round;
 
 public class NameScoreCalculator {
 
-    public double calculate(String query, String name, List<String> alternateNames) {
-        String normalizedQuery = normalize(query);
-        String normalizedName = normalize(name);
+    public double calculate(String searchPrefix, String str) {
+        String normalizedQuery = normalize(searchPrefix);
+        String normalizedName = normalize(str);
 
         if(StringUtils.equals(normalizedQuery, normalizedName)) {
             return 1.0;
@@ -19,16 +17,14 @@ public class NameScoreCalculator {
 
         if(startsWith(normalizedName, normalizedQuery)) {
             String commonPrefix = getCommonPrefix(normalizedQuery, normalizedName);
-            if (isBlank(commonPrefix)) {
-                return 0.0;
+            if (isNotBlank(commonPrefix)) { //FIXME
+                Integer commonPrefixLength = length(commonPrefix);
+                Integer longestLength = longestLength(normalizedQuery, normalizedName);
+
+                Double score = commonPrefixLength.doubleValue() / longestLength.doubleValue();
+
+                return round(score, 2);
             }
-
-            Integer commonPrefixLength = length(commonPrefix);
-            Integer longestLength = longestLength(normalizedQuery, normalizedName);
-
-            Double distance = commonPrefixLength.doubleValue() / longestLength.doubleValue();
-
-            return round(distance, 2);
         }
 
         return 0.0;

@@ -2,14 +2,14 @@ package com.coveo.challenge.service;
 
 import com.coveo.challenge.model.Suggestions;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-@Component
+@Service
 public class SuggestionsService {
 
     private static final String ERROR_MESSAGE_TEMPLATE = "when %s is not null then %s should not be null";
-
 
     public Suggestions call(String query, Double latitude, Double longitude) {
         checkArgument(latitude != null && longitude == null, ERROR_MESSAGE_TEMPLATE, "latitude", "longitude");
