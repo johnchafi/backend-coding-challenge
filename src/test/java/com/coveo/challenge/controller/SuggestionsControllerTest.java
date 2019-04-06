@@ -13,14 +13,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ApiControllerTest {
+public class SuggestionsControllerTest {
 
     private static final String ANY_QUERY = "query";
     private static final Double ANY_LATITUDE = 51.34;
     private static final Double ANY_LONGITUDE = 123.98;
 
     @InjectMocks
-    private ApiController underTest;
+    private SuggestionsController underTest;
 
     @Mock
     private SuggestionsService suggestionsService;

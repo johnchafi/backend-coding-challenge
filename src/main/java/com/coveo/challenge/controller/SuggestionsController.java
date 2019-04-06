@@ -3,23 +3,29 @@ package com.coveo.challenge.controller;
 import com.coveo.challenge.model.Suggestions;
 import com.coveo.challenge.service.SuggestionsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Component
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 @RestController
-public class ApiController {
+@Validated
+public class SuggestionsController {
+
+    private static final String ERROR_MESSAGE_TEMPLATE = "when %s is not null then %s should not be null";
 
     @Autowired
     private SuggestionsService suggestionsService;
 
     @RequestMapping(value = "/suggestions", method = RequestMethod.GET)
     public Suggestions getSuggestions(@RequestParam(value = "q") String query,
-                                                      @RequestParam(value = "latitude", required = false) Double latitude,
-                                                      @RequestParam(value = "longitude", required =  false) Double longitude) {
-      return suggestionsService.call(query, latitude, longitude);
+                                      @RequestParam(value = "latitude", required = false) @Min(-90l) @Max(90l) Double latitude,
+                                      @RequestParam(value = "longitude", required =  false) @Min(-180l) @Max(180l) Double longitude) {
+
+        return suggestionsService.call(query, latitude, longitude);
     }
 }

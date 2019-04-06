@@ -33,6 +33,7 @@ public class LinesParser {
     }
 
     private Suggestion suggestion(String line) {
-        return lineParser.parse(line);
+        return null;
+        //return lineParser.parse(line);
     }
 }

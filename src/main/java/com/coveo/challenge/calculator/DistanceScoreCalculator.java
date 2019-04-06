@@ -1,6 +1,7 @@
 package com.coveo.challenge.calculator;
 
 import com.coveo.challenge.model.Point;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static org.apache.commons.math3.util.Precision.round;
@@ -10,11 +11,11 @@ public class DistanceScoreCalculator {
 
     private static final double DISTANCE_THRESHOLD = 500.0;
 
-    // Validation
-    // latitude must be [-90, 90]
-    // longitude must be [-180, 80]
+    @Autowired
+    private DistanceStrategyFactory distanceStrategyFactory;
 
-    public double calculate(Point start, Point end, DistanceComputationStrategy distanceStrategy) {
+    public double calculate(Point start, Point end) {
+        DistanceStrategy distanceStrategy = distanceStrategyFactory.getStrategy(DistanceStrategyFactory.HAVERSINE);
         double distance = distanceStrategy.calculate(start, end);
         return rescale(distance);
     }

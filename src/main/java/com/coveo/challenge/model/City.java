@@ -3,21 +3,23 @@ package com.coveo.challenge.model;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
+import java.math.BigInteger;
 
 @Data
 @Builder
 public class City {
 
-    private Integer id;
-
     private String name;
 
-    private List<String> alternateNames;
+    private String[] alternateNames;
 
     private Point geographicalCoordinates;
 
-    private String country;
+    private String countryCode;
+
+    private String adminCode;
+
+    private BigInteger population;
 
     private Double nameScore;
 

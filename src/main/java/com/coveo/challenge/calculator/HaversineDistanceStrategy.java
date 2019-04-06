@@ -7,7 +7,7 @@ import static org.apache.commons.math3.util.FastMath.*;
 import static org.apache.commons.math3.util.FastMath.sqrt;
 
 @Component
-public class HaversineDistanceComputationStrategy implements DistanceComputationStrategy {
+public class HaversineDistanceStrategy implements DistanceStrategy {
 
     private static final double EARTH_RADIUS_IN_KM = 6371.0;
 
@@ -24,16 +24,16 @@ public class HaversineDistanceComputationStrategy implements DistanceComputation
         double endLatToRad = toRadians(end.getLatitude());
         double endLongToRad = toRadians(end.getLongitude());
 
-        double a = haversin(startLatToRad, endLatToRad)
+        double a = haversine(startLatToRad, endLatToRad)
                 + cos(startLatToRad)
                 * cos(endLatToRad)
-                * haversin(startLongToRad, endLongToRad);
+                * haversine(startLongToRad, endLongToRad);
         double c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
         return EARTH_RADIUS_IN_KM * c;
     }
 
-    private double haversin(double start, double end) {
+    private double haversine(double start, double end) {
         return pow(sin((end - start) / 2), 2);
     }
 }
