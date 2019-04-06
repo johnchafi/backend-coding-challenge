@@ -4,12 +4,15 @@ import com.coveo.challenge.model.Point;
 import org.springframework.stereotype.Component;
 
 import static org.apache.commons.math3.util.FastMath.*;
+import static org.apache.commons.math3.util.Precision.round;
 
 
 @Component
 public class DistanceScoreCalculator {
 
     private static final double EARTH_RADIUS_IN_KM = 6371.0;
+    private static final double DISTANCE_THRESHOLD = 500.0;
+
     // Validation
     // latitude must be [-90, 90]
     // longitude must be [-180, 80]
@@ -41,6 +44,9 @@ public class DistanceScoreCalculator {
 
     // https://en.wikipedia.org/wiki/Feature_scaling#Rescaling_(min-max_normalization)
     private double rescale(double distance) {
-        return 1 - (distance / EARTH_RADIUS_IN_KM);
+        if(distance <= DISTANCE_THRESHOLD) {
+            return round(1 - (distance / DISTANCE_THRESHOLD), 2);
+        }
+        return 0.0;
     }
 }
