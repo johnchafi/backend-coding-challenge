@@ -1,10 +1,12 @@
 package com.coveo.challenge.calculator;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.commons.math3.util.Precision.round;
 
+@Component
 public class NameScoreCalculator {
 
     public double calculate(String searchPrefix, String str) {

@@ -13,7 +13,11 @@ public class City {
 
     private String[] alternateNames;
 
-    private Point geographicalCoordinates;
+    //private Double latitude;
+
+    //private Double longitude;ç
+
+    private Point coordinates;
 
     private String countryCode;
 
@@ -21,9 +25,9 @@ public class City {
 
     private BigInteger population;
 
-    private Double nameScore;
+    //private Double nameScore;
 
-    private Double alternateNamesScore;
+    //private Double alternateNamesScore;
 
-    private Double distanceScore;
+    //private Double distanceScore;
 }

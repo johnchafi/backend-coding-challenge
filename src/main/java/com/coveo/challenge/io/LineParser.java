@@ -1,9 +1,10 @@
 package com.coveo.challenge.io;
 
 import com.coveo.challenge.model.City;
-import com.coveo.challenge.model.Point;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+
+import java.math.BigInteger;
 
 @Component
 public class LineParser {
@@ -15,17 +16,19 @@ public class LineParser {
         String[] values = StringUtils.split(line, COLUMN_SEPARATOR);
         String name = values[1];
         String[] alternateNames = StringUtils.split(values[2], LIST_SEPARATOR);
-        Double latitude = Double.parseDouble(values[4]);
-        Double longitude = Double.parseDouble(values[5]);
+        Double latitude = new Double(values[4]);
+        Double longitude = new Double(values[5]);
         String countryCode = values[8];
         String adminCode = values[10];
-        //BigInteger population = new BigInteger(values[14]);
+        BigInteger population = new BigInteger(values[14]);
         return City.builder()
                 .name(name)
                 .alternateNames(alternateNames)
-                .geographicalCoordinates(new Point(latitude, longitude))
-                .countryCode(countryCode) // Parse code (United States or Canada)
-                .adminCode(adminCode) // Parse code (provinces or states)
+                .latitude(latitude)
+                .longitude(longitude)
+                .countryCode(countryCode) // TODO: Parse code (United States or Canada)
+                .adminCode(adminCode) // TODO: Parse code (provinces or states)
+                .population(population)
                 .build();
     }
 

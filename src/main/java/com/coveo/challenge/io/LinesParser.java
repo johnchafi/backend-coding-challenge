@@ -1,5 +1,6 @@
 package com.coveo.challenge.io;
 
+import com.coveo.challenge.model.City;
 import com.coveo.challenge.model.Suggestion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ import static org.apache.commons.lang3.StringUtils.split;
 @Component
 public class LinesParser {
 
-    private static final String FILENAME = "data/cities_canada-usa.tsv";
+    private static final String CITIES_FILENAME = "data/cities_canada-usa.tsv";
 
     @Autowired
     private ResourceProvider resourceProvider;
@@ -23,8 +24,8 @@ public class LinesParser {
     @Autowired
     private LineParser lineParser;
 
-    private List<Suggestion> parse() throws IOException {
-        String content = resourceProvider.resourceAsString(FILENAME);
+    private List<Suggestion> parse(String query, Double latitude, Double longitude) throws IOException {
+        String content = resourceProvider.resourceAsString(CITIES_FILENAME);
         String[] lines = split(content, LINE_SEPARATOR_UNIX);
         return Arrays.stream(lines)
                 .map(line -> suggestion(line))
@@ -33,7 +34,17 @@ public class LinesParser {
     }
 
     private Suggestion suggestion(String line) {
-        return null;
-        //return lineParser.parse(line);
+        City city = city(line);
+
+        return Suggestion.builder()
+                .name(city.getName())
+                .latitude(city.getLatitude())
+                .longitude(city.getLongitude())
+                .score(0.0)
+                .build();
+    }
+
+    private City city(String line) {
+        return lineParser.parse(line);
     }
 }

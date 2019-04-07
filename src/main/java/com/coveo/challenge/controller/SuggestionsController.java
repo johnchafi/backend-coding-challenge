@@ -25,7 +25,6 @@ public class SuggestionsController {
     public Suggestions getSuggestions(@RequestParam(value = "q") String query,
                                       @RequestParam(value = "latitude", required = false) @Min(-90l) @Max(90l) Double latitude,
                                       @RequestParam(value = "longitude", required =  false) @Min(-180l) @Max(180l) Double longitude) {
-
         return suggestionsService.call(query, latitude, longitude);
     }
 }
