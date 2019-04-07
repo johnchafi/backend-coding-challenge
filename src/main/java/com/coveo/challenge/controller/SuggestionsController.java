@@ -16,15 +16,13 @@ import javax.validation.constraints.Min;
 @Validated
 public class SuggestionsController {
 
-    private static final String ERROR_MESSAGE_TEMPLATE = "when %s is not null then %s should not be null";
-
     @Autowired
     private SuggestionsService suggestionsService;
 
     @RequestMapping(value = "/suggestions", method = RequestMethod.GET)
     public Suggestions getSuggestions(@RequestParam(value = "q") String query,
                                       @RequestParam(value = "latitude", required = false) @Min(-90l) @Max(90l) Double latitude,
-                                      @RequestParam(value = "longitude", required =  false) @Min(-180l) @Max(180l) Double longitude) {
+                                      @RequestParam(value = "longitude", required =  false) @Min(-180l) @Max(180l) Double longitude) throws Exception {
         return suggestionsService.call(query, latitude, longitude);
     }
 }

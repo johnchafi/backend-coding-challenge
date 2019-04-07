@@ -9,7 +9,7 @@ import static org.apache.commons.math3.util.Precision.round;
 @Component
 public class DistanceScoreCalculator {
 
-    private static final double DISTANCE_THRESHOLD = 500.0;
+    private static final double DISTANCE_THRESHOLD = 200.0;
 
     @Autowired
     private DistanceStrategyFactory distanceStrategyFactory;

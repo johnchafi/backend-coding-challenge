@@ -13,12 +13,12 @@ public class SuggestionsServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenSearch_givenNullLatitude_thenShouldThrowException() {
+    public void whenSearch_givenNullLatitude_thenShouldThrowException() throws Exception {
         underTest.call("query", null, 0.0);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenSearch_givenNullLongitude_thenShouldThrowException() {
+    public void whenSearch_givenNullLongitude_thenShouldThrowException() throws Exception {
         underTest.call("query", 0.0, null);
     }
 

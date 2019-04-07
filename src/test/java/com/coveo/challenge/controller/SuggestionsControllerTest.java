@@ -9,15 +9,16 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SuggestionsControllerTest {
 
-    private static final String ANY_QUERY = "query";
-    private static final Double ANY_LATITUDE = 51.34;
-    private static final Double ANY_LONGITUDE = 123.98;
+    private static final String VALID_QUERY = "query";
+    private static final Double VALID_LATITUDE = 51.34;
+    private static final Double VALID_LONGITUDE = 123.98;
+    private static final Double INVALID_LATITUDE = 111.11;
+    private static final Double INVALID_LONGITUDE = -181.983;
 
     @InjectMocks
     private SuggestionsController underTest;
@@ -26,14 +27,23 @@ public class SuggestionsControllerTest {
     private SuggestionsService suggestionsService;
 
     @Test
-    public void whenGetSuggestions_givenParams_thenShouldCallSuggestionsService() {
-        Suggestions expected = Suggestions.builder().build();
-        when(suggestionsService.call(ANY_QUERY, ANY_LATITUDE, ANY_LONGITUDE)).thenReturn(expected);
+    public void whenGetSuggestions_givenNullQuery_thenShouldThrowException() throws Exception {
+        try {
+            underTest.getSuggestions(null, VALID_LATITUDE, VALID_LONGITUDE);
+        } catch (Exception e){
+            throw new IllegalArgumentException(e);
+        }
+    }
 
-        Suggestions actual = underTest.getSuggestions(ANY_QUERY, ANY_LATITUDE, ANY_LONGITUDE);
+    @Test
+    public void whenGetSuggestions_givenValidParams_thenShouldCallSuggestionsService() throws Exception {
+        Suggestions expected = mock(Suggestions.class);
+        when(suggestionsService.call(VALID_QUERY, VALID_LATITUDE, VALID_LONGITUDE)).thenReturn(expected);
+
+        Suggestions actual = underTest.getSuggestions(VALID_QUERY, VALID_LATITUDE, VALID_LONGITUDE);
 
         assertThat(actual).isEqualTo(expected);
-        verify(suggestionsService).call(ANY_QUERY, ANY_LATITUDE, ANY_LONGITUDE);
+        verify(suggestionsService).call(VALID_QUERY, VALID_LATITUDE, VALID_LONGITUDE);
     }
 }
 
