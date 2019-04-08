@@ -25,7 +25,7 @@ public class NameScoreCalculatorTest {
 
     @Test
     public void whenCalculate_givenWordWithGreaterLength_thenShouldReturnExpected() {
-        executeTest("almaq", "Alma", 0.8);
+        executeTest("Montreal", "mont", 0.5);
     }
 
     private void executeTest(String query, String name, double expected) {
