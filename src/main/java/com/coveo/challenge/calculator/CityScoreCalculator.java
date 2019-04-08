@@ -16,19 +16,21 @@ public class CityScoreCalculator {
     @Autowired
     private DistanceScoreCalculator distanceScoreCalculator;
 
-    public double calculate(String searchWord, Double latitude, Double longitude, City city) {
-        double distanceScore = 0.0;
-        double score = nameScoreCalculator.calculate(searchWord, city.getName());
-        double totalScore = score;
+    public double calculate(String searchWord, Double searchLatitude, Double searchLongitude, City city) {
+        double totalScore = nameScoreCalculator.calculate(searchWord, city.getName());
 
-        if(totalScore > 0.0 && latitude != null && longitude != null) {
-            distanceScore = distanceScoreCalculator.calculate(
-                    new Point(latitude, longitude),
-                    city.getCoordinates());
-            totalScore = (totalScore + distanceScore) / 2;
+        if(totalScore > 0.0 && searchLatitude != null && searchLongitude != null) {
+            totalScore = totalScoreWithDistance(new Point(searchLatitude, searchLongitude),
+                    city.getCoordinates(),
+                    totalScore);
         }
 
         return round(totalScore, 2);
+    }
+
+    private double totalScoreWithDistance(Point searchPoint, Point point, double score) {
+        double distanceScore = distanceScoreCalculator.calculate(searchPoint, point);
+        return (score + distanceScore) / 2;
     }
 
 }
