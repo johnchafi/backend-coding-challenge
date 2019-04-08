@@ -13,14 +13,18 @@ public class StringUtil {
     }
 
     public static String normalize(String str) {
-        String normalizedStr = " " + upperCase(str) + " ";
+        if(isBlank(str)) {
+            return "";
+        }
+
+        String normalizedStr = " " + upperCase(str == null ? "" : str) + " ";
         normalizedStr = stripAccents(normalizedStr);
 
         if (isNotBlank(normalizedStr)) {
-            normalizedStr = normalizedStr.replaceAll("[-\\.,]", " ");
-            normalizedStr = normalizedStr.replaceAll("'", " ");
-            normalizedStr = normalizedStr.replaceAll("[^a-zA-Z\\s]", " ");
-            normalizedStr = normalizedStr.replaceAll("\\s[a-z]\\s", " ");
+            normalizedStr = normalizedStr.replaceAll("[-\\.,]", "");
+            normalizedStr = normalizedStr.replaceAll("'", "");
+            normalizedStr = normalizedStr.replaceAll("[^a-zA-Z\\s]", "");
+            normalizedStr = normalizedStr.replaceAll("\\s[a-z]\\s", "");
         }
 
         normalizedStr = trimToNull(normalizedStr);
