@@ -2,26 +2,54 @@ package com.coveo.challenge.calculator;
 
 import com.coveo.challenge.model.Point;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DistanceScoreCalculatorTest {
 
-    private DistanceScoreCalculator underTest = new DistanceScoreCalculator();
+    private static final Double DISTANCE_LESS_THAN_THRESHOLD = 123.54309;
+    private static final Double DISTANCE_GREATER_THAN_THRESHOLD = 228.9456;
+    private static final Point START = new Point(34.5, 76.0);
+    private static final Point END = new Point(67.098, 54.6);
+
+    @InjectMocks
+    private DistanceScoreCalculator underTest;
+
+    @Mock
+    private DistanceStrategyFactory distanceStrategyFactory;
 
     @Test
-    public void whenCalculate_givenStartAndEnd_thenReturnExpectedDistance() {
-        double latA = 43.70011;//45.508889;
-        double longA = -79.416;//-73.561667;
-        double latB = 42.98339;//46.816667;
-        double longB = -81.23304;//-71.216667;
-        double score = 0.07;
-        Point start = new Point(latA, longA);
-        Point end = new Point(latB, longB);
+    public void whenCalculate_givenDistanceLessThanThreshold_thenReturnExpectedDistance() {
+        DistanceStrategy distanceStrategy = mock(DistanceStrategy.class);
+        when(distanceStrategy.calculate(START, END)).thenReturn(DISTANCE_LESS_THAN_THRESHOLD);
+        when(distanceStrategyFactory.getStrategy(DistanceStrategyFactory.HAVERSINE)).thenReturn(distanceStrategy);
 
-        double actual = underTest.calculate(start, end);
+        double expected = 0.38;
 
-        assertThat(actual).isEqualTo(score);
+        double actual = underTest.calculate(START, END);
+
+        assertThat(actual).isEqualTo(expected);
+        verify(distanceStrategyFactory).getStrategy(DistanceStrategyFactory.HAVERSINE);
+    }
+
+    @Test
+    public void whenCalculate_givenDistanceGreaterThanThreshold_thenReturnExpectedDistance() {
+        DistanceStrategy distanceStrategy = mock(DistanceStrategy.class);
+        when(distanceStrategy.calculate(START, END)).thenReturn(DISTANCE_GREATER_THAN_THRESHOLD);
+        when(distanceStrategyFactory.getStrategy(DistanceStrategyFactory.HAVERSINE)).thenReturn(distanceStrategy);
+
+        double expected = 0.0;
+
+        double actual = underTest.calculate(START, END);
+
+        assertThat(actual).isEqualTo(expected);
+        verify(distanceStrategyFactory).getStrategy(DistanceStrategyFactory.HAVERSINE);
     }
 
 } 
