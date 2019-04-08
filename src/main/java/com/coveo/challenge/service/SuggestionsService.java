@@ -37,8 +37,8 @@ public class SuggestionsService {
         return Arrays.stream(lines())
                 .skip(1)
                 .map(line -> suggestionFinder.getSuggestion(line, query, latitude, longitude))
-                .filter(scoreHigherThanZero())
-                .sorted(sortedByScoreAsc())
+                .filter(scoreGreaterThanZero())
+                .sorted(sortedByScoreDesc())
                 .collect(toList());
     }
 
@@ -47,12 +47,12 @@ public class SuggestionsService {
         return split(content, LINE_SEPARATOR_UNIX);
     }
 
-    private Predicate<Suggestion> scoreHigherThanZero() {
+    private Predicate<Suggestion> scoreGreaterThanZero() {
         return suggestion -> suggestion.getScore() > 0.0;
     }
 
-    private Comparator<Suggestion> sortedByScoreAsc() {
-        return Comparator.comparing(city -> city.getScore(), Comparator.reverseOrder());
+    private Comparator<Suggestion> sortedByScoreDesc() {
+        return Comparator.comparing(suggestion -> suggestion.getScore(), Comparator.reverseOrder());
     }
 
 

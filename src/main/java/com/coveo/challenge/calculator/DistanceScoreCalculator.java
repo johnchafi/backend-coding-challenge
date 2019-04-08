@@ -1,5 +1,7 @@
 package com.coveo.challenge.calculator;
 
+import com.coveo.challenge.calculator.strategy.distance.DistanceStrategy;
+import com.coveo.challenge.calculator.strategy.distance.DistanceStrategyFactory;
 import com.coveo.challenge.model.Point;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +18,7 @@ public class DistanceScoreCalculator {
 
     public double calculate(Point start, Point end) {
         DistanceStrategy distanceStrategy = distanceStrategyFactory.getStrategy(DistanceStrategyFactory.HAVERSINE);
-        double distance = distanceStrategy.calculate(start, end);
+        double distance = distanceStrategy.distance(start, end);
         return rescale(distance);
     }
 

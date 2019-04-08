@@ -43,10 +43,10 @@ public class SuggestionFinderTest {
 
         Suggestion actual = underTest.getSuggestion(LINE, QUERY, SEARCH_LATITUDE, SEARCH_LONGITUDE);
 
-        assertThat(actual.getName()).isEqualTo(NAME);
+        assertThat(actual.getName()).isEqualTo(city.getFullName());
         assertThat(actual.getLatitude()).isEqualTo(LATITUDE);
         assertThat(actual.getLongitude()).isEqualTo(LONGITUDE);
-        assertThat(actual.getLatitude()).isEqualTo(ANY_SCORE);
+        assertThat(actual.getScore()).isEqualTo(ANY_SCORE);
     }
 
     private City city() {

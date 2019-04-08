@@ -10,6 +10,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.apache.commons.lang3.StringUtils.split;
+import static org.apache.commons.lang3.StringUtils.trimToEmpty;
+
 @Component
 public class LineParser {
 
@@ -24,9 +30,9 @@ public class LineParser {
 
     public City parse(String line) {
         line = line.replaceAll("\t\t", "\t \t");
-        String[] values = StringUtils.split(line, COLUMN_SEPARATOR);
+        String[] values = split(line, COLUMN_SEPARATOR);
         String name = values[1];
-        String[] alternateNames = StringUtils.split(values[2], LIST_SEPARATOR);
+        String[] alternateNames = split(trimToEmpty(values[3]), LIST_SEPARATOR);
         Double latitude = new Double(values[4]);
         Double longitude = new Double(values[5]);
         Country country = countryConverter.convertToY(values[8]);
