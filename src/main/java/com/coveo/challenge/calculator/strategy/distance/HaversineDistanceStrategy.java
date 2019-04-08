@@ -1,4 +1,4 @@
-package com.coveo.challenge.calculator;
+package com.coveo.challenge.calculator.strategy.distance;
 
 import com.coveo.challenge.model.Point;
 
@@ -9,13 +9,13 @@ public class HaversineDistanceStrategy implements DistanceStrategy {
     private static final double EARTH_RADIUS_IN_KM = 6371.0;
 
     @Override
-    public double calculate(Point start, Point end) {
-        return distance(start, end);
+    public double distance(Point start, Point end) {
+        return compute(start, end);
     }
 
     // Haversine formula
     // http://www.movable-type.co.uk/scripts/latlong.html
-    private double distance(Point start, Point end) {
+    private double compute(Point start, Point end) {
         double startLatToRad = toRadians(start.getLatitude());
         double startLongToRad = toRadians(start.getLongitude());
         double endLatToRad = toRadians(end.getLatitude());

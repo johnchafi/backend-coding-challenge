@@ -1,4 +1,4 @@
-package com.coveo.challenge.calculator;
+package com.coveo.challenge.calculator.strategy.distance;
 
 import org.springframework.stereotype.Component;
 

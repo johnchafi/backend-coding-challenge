@@ -1,6 +1,5 @@
 package com.coveo.challenge.io;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,15 +10,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class ResourceProviderTest {
 
     public static final String RESOURCE_NOT_FOUND = "not_found.txt";
-    public static final String RESOURCE_FOUND = "data/cities_canada-usa_test.tsv";
+    public static final String RESOURCE_FOUND = "data/existing_resource.tsv";
 
-    private ResourceProvider underTest;
-
-
-    @Before
-    public void setUp() {
-        underTest = new ResourceProvider();
-    }
+    private ResourceProvider underTest = new ResourceProvider();
 
     @Test
     public void whenResourceAsStream_givenResourceNotFound_thenShouldReturnNull() {

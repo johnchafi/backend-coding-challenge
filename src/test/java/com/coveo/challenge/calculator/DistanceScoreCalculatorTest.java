@@ -1,5 +1,7 @@
 package com.coveo.challenge.calculator;
 
+import com.coveo.challenge.calculator.strategy.distance.DistanceStrategy;
+import com.coveo.challenge.calculator.strategy.distance.DistanceStrategyFactory;
 import com.coveo.challenge.model.Point;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +29,7 @@ public class DistanceScoreCalculatorTest {
     @Test
     public void whenCalculate_givenDistanceLessThanThreshold_thenReturnExpectedDistance() {
         DistanceStrategy distanceStrategy = mock(DistanceStrategy.class);
-        when(distanceStrategy.calculate(START, END)).thenReturn(DISTANCE_LESS_THAN_THRESHOLD);
+        when(distanceStrategy.distance(START, END)).thenReturn(DISTANCE_LESS_THAN_THRESHOLD);
         when(distanceStrategyFactory.getStrategy(DistanceStrategyFactory.HAVERSINE)).thenReturn(distanceStrategy);
 
         double expected = 0.38;
@@ -41,7 +43,7 @@ public class DistanceScoreCalculatorTest {
     @Test
     public void whenCalculate_givenDistanceGreaterThanThreshold_thenReturnExpectedDistance() {
         DistanceStrategy distanceStrategy = mock(DistanceStrategy.class);
-        when(distanceStrategy.calculate(START, END)).thenReturn(DISTANCE_GREATER_THAN_THRESHOLD);
+        when(distanceStrategy.distance(START, END)).thenReturn(DISTANCE_GREATER_THAN_THRESHOLD);
         when(distanceStrategyFactory.getStrategy(DistanceStrategyFactory.HAVERSINE)).thenReturn(distanceStrategy);
 
         double expected = 0.0;
