@@ -3,8 +3,7 @@ package com.coveo.challenge.service;
 import com.coveo.challenge.io.ResourceProvider;
 import com.coveo.challenge.model.Suggestion;
 import com.coveo.challenge.model.Suggestions;
-import com.coveo.challenge.suggestion.SuggestionFinder;
-import org.junit.Before;
+import com.coveo.challenge.suggestion.SuggestionResolver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,7 +12,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.never;
@@ -40,7 +38,7 @@ public class SuggestionsServiceTest {
     private ResourceProvider resourceProvider;
 
     @Mock
-    private SuggestionFinder suggestionFinder;
+    private SuggestionResolver suggestionResolver;
 
     @Test
     public void whenCall_givenSuggestions_thenShouldReturnEmpty() throws Exception {
@@ -50,9 +48,9 @@ public class SuggestionsServiceTest {
         Suggestions expected = Suggestions.builder().suggestions(Arrays.asList(suggestion3, suggestion2)).build();
 
         when(resourceProvider.resourceAsString(CITIES_FILENAME)).thenReturn(CONTENT);
-        when(suggestionFinder.getSuggestion(LINE_1, QUERY, LATITUDE, LONGITUDE)).thenReturn(suggestion1);
-        when(suggestionFinder.getSuggestion(LINE_2, QUERY, LATITUDE, LONGITUDE)).thenReturn(suggestion2);
-        when(suggestionFinder.getSuggestion(LINE_3, QUERY, LATITUDE, LONGITUDE)).thenReturn(suggestion3);
+        when(suggestionResolver.getSuggestion(LINE_1, QUERY, LATITUDE, LONGITUDE)).thenReturn(suggestion1);
+        when(suggestionResolver.getSuggestion(LINE_2, QUERY, LATITUDE, LONGITUDE)).thenReturn(suggestion2);
+        when(suggestionResolver.getSuggestion(LINE_3, QUERY, LATITUDE, LONGITUDE)).thenReturn(suggestion3);
 
         Suggestions actual = underTest.call(QUERY, LATITUDE, LONGITUDE);
 
@@ -60,10 +58,10 @@ public class SuggestionsServiceTest {
 
         verify(resourceProvider).resourceAsString(CITIES_FILENAME);
 
-        verify(suggestionFinder, never()).getSuggestion(HEADER, QUERY, LATITUDE, LONGITUDE);
-        verify(suggestionFinder).getSuggestion(LINE_1, QUERY, LATITUDE, LONGITUDE);
-        verify(suggestionFinder).getSuggestion(LINE_2, QUERY, LATITUDE, LONGITUDE);
-        verify(suggestionFinder).getSuggestion(LINE_3, QUERY, LATITUDE, LONGITUDE);
+        verify(suggestionResolver, never()).getSuggestion(HEADER, QUERY, LATITUDE, LONGITUDE);
+        verify(suggestionResolver).getSuggestion(LINE_1, QUERY, LATITUDE, LONGITUDE);
+        verify(suggestionResolver).getSuggestion(LINE_2, QUERY, LATITUDE, LONGITUDE);
+        verify(suggestionResolver).getSuggestion(LINE_3, QUERY, LATITUDE, LONGITUDE);
     }
 
     @Test(expected = IOException.class)

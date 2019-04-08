@@ -3,7 +3,7 @@ package com.coveo.challenge.service;
 import com.coveo.challenge.io.ResourceProvider;
 import com.coveo.challenge.model.Suggestion;
 import com.coveo.challenge.model.Suggestions;
-import com.coveo.challenge.suggestion.SuggestionFinder;
+import com.coveo.challenge.suggestion.SuggestionResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class SuggestionsService {
     private ResourceProvider resourceProvider;
 
     @Autowired
-    private SuggestionFinder suggestionFinder;
+    private SuggestionResolver suggestionResolver;
 
     public Suggestions call(String query, Double latitude, Double longitude) throws IOException {
         List<Suggestion> suggestions = getSuggestions(query, latitude, longitude);
@@ -36,7 +36,7 @@ public class SuggestionsService {
     private List<Suggestion> getSuggestions(String query, Double latitude, Double longitude) throws IOException {
         return Arrays.stream(lines())
                 .skip(1)
-                .map(line -> suggestionFinder.getSuggestion(line, query, latitude, longitude))
+                .map(line -> suggestionResolver.getSuggestion(line, query, latitude, longitude))
                 .filter(scoreGreaterThanZero())
                 .sorted(sortedByScoreDesc())
                 .collect(toList());

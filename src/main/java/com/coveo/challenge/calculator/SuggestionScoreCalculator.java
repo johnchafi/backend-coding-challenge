@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import static org.apache.commons.math3.util.Precision.round;
 
 @Component
-public class CityScoreCalculator {
+public class SuggestionScoreCalculator {
 
     @Autowired
     private NameScoreCalculator nameScoreCalculator;

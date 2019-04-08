@@ -1,6 +1,6 @@
 package com.coveo.challenge.suggestion;
 
-import com.coveo.challenge.calculator.CityScoreCalculator;
+import com.coveo.challenge.calculator.SuggestionScoreCalculator;
 import com.coveo.challenge.io.LineParser;
 import com.coveo.challenge.model.City;
 import com.coveo.challenge.model.Suggestion;
@@ -8,17 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SuggestionFinder {
+public class SuggestionResolver {
 
     @Autowired
     private LineParser lineParser;
 
     @Autowired
-    private CityScoreCalculator cityScoreCalculator;
+    private SuggestionScoreCalculator suggestionScoreCalculator;
 
     public Suggestion getSuggestion(String line, String query, Double latitude, Double longitude) {
         City city = lineParser.parse(line);
-        double totalScore = cityScoreCalculator.calculate(query, latitude, longitude, city);
+        double totalScore = suggestionScoreCalculator.calculate(query, latitude, longitude, city);
 
         return Suggestion.builder()
                 .name(city.getFullName())
@@ -27,6 +27,5 @@ public class SuggestionFinder {
                 .score(totalScore)
                 .build();
     }
-
 
 }

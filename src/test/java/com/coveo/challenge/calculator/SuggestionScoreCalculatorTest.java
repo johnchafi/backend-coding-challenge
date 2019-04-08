@@ -14,7 +14,7 @@ import static org.apache.commons.math3.util.Precision.round;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CityScoreCalculatorTest {
+public class SuggestionScoreCalculatorTest {
 
     private static final String SEARCH_WORD = "word";
     private static final Double ANY_LATITUDE = 45.284;
@@ -24,7 +24,7 @@ public class CityScoreCalculatorTest {
     private static final Double CITY_LONGITUDE = -75.603;
 
     @InjectMocks
-    private CityScoreCalculator underTest;
+    private SuggestionScoreCalculator underTest;
 
     @Mock
     private NameScoreCalculator nameScoreCalculator;

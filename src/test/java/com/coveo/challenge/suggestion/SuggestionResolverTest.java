@@ -1,6 +1,6 @@
 package com.coveo.challenge.suggestion;
 
-import com.coveo.challenge.calculator.CityScoreCalculator;
+import com.coveo.challenge.calculator.SuggestionScoreCalculator;
 import com.coveo.challenge.io.LineParser;
 import com.coveo.challenge.model.City;
 import com.coveo.challenge.model.Point;
@@ -15,7 +15,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SuggestionFinderTest {
+public class SuggestionResolverTest {
 
     private static final String LINE = "line";
     private static final String QUERY = "query";
@@ -27,19 +27,19 @@ public class SuggestionFinderTest {
     private static final double ANY_SCORE = 0.5;
 
     @InjectMocks
-    private SuggestionFinder underTest;
+    private SuggestionResolver underTest;
 
     @Mock
     private LineParser lineParser;
 
     @Mock
-    private CityScoreCalculator cityScoreCalculator;
+    private SuggestionScoreCalculator suggestionScoreCalculator;
 
     @Test
     public void whenGetSuggestion_givenCity_thenShouldReturnExpectedSuggestion() {
         City city = city();
         when(lineParser.parse(LINE)).thenReturn(city);
-        when(cityScoreCalculator.calculate(QUERY, SEARCH_LATITUDE, SEARCH_LONGITUDE, city)).thenReturn(ANY_SCORE);
+        when(suggestionScoreCalculator.calculate(QUERY, SEARCH_LATITUDE, SEARCH_LONGITUDE, city)).thenReturn(ANY_SCORE);
 
         Suggestion actual = underTest.getSuggestion(LINE, QUERY, SEARCH_LATITUDE, SEARCH_LONGITUDE);
 
