@@ -8,6 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.IOException;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -17,8 +19,6 @@ public class SuggestionsControllerTest {
     private static final String VALID_QUERY = "query";
     private static final Double VALID_LATITUDE = 51.34;
     private static final Double VALID_LONGITUDE = 123.98;
-    private static final Double INVALID_LATITUDE = 111.11;
-    private static final Double INVALID_LONGITUDE = -181.983;
 
     @InjectMocks
     private SuggestionsController underTest;
@@ -26,13 +26,10 @@ public class SuggestionsControllerTest {
     @Mock
     private SuggestionsService suggestionsService;
 
-    @Test
-    public void whenGetSuggestions_givenNullQuery_thenShouldThrowException() throws Exception {
-        try {
-            underTest.getSuggestions(null, VALID_LATITUDE, VALID_LONGITUDE);
-        } catch (Exception e){
-            throw new IllegalArgumentException(e);
-        }
+    @Test(expected = IOException.class)
+    public void whenGetSuggestions_givenException_thenShouldThrowException() throws Exception {
+        when(suggestionsService.call(VALID_QUERY, VALID_LATITUDE, VALID_LONGITUDE)).thenThrow(IOException.class);
+        underTest.getSuggestions(VALID_QUERY, VALID_LATITUDE, VALID_LONGITUDE);
     }
 
     @Test

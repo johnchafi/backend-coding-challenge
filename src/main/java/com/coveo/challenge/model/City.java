@@ -17,4 +17,10 @@ public class City {
 
     private AdminCode adminCode;
 
+    public String getFullName() {
+        String regionName = adminCode != null ? adminCode.getFullName() : " ";
+        String countryName = country != null ? country.getFullName() : " ";
+        return name + ", " + regionName + ", " + countryName;
+    }
+
 }

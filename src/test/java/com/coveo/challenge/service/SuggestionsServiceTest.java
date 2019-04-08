@@ -1,27 +1,23 @@
 package com.coveo.challenge.service;
 
-import org.junit.Before;
-import org.junit.Test;
+import com.coveo.challenge.io.ResourceProvider;
+import com.coveo.challenge.suggestion.SuggestionFinder;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SuggestionsServiceTest {
 
+    @InjectMocks
     private SuggestionsService underTest;
 
-    @Before
-    public void setUp() {
-        underTest = new SuggestionsService();
-    }
+    @Mock
+    private ResourceProvider resourceProvider;
 
-    @Test(expected = IllegalArgumentException.class)
-    public void whenSearch_givenNullLatitude_thenShouldThrowException() throws Exception {
-        underTest.call("query", null, 0.0);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenSearch_givenNullLongitude_thenShouldThrowException() throws Exception {
-        underTest.call("query", 0.0, null);
-    }
-
+    @Mock
+    private SuggestionFinder suggestionFinder;
 
 }
 

@@ -19,8 +19,8 @@ public class CountryConverter implements Converter<String, Country> {
     @Override
     public Country convertToY(String value) {
         Optional<Country> countryFound = Arrays.stream(Country.values())
-                .filter(v -> equalsAny(v.getCode(), v.getFullName()))
-                .findFirst();
+                .filter(v -> equalsAny(value, v.getCode(), v.getFullName()))
+                .findAny();
         return countryFound.isPresent() ? countryFound.get() : null;
     }
 
