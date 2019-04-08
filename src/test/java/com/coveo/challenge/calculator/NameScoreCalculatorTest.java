@@ -10,27 +10,25 @@ public class NameScoreCalculatorTest {
 
     @Test
     public void whenCalculate_givenSameWord_thenShouldReturnExpected() {
-        String query = "london";
-        String name = "London";
-        double expected = 1.0;
-        double actual = underTest.calculate(query, name);
-        assertThat(actual).isEqualTo(expected);
+        executeTest("london", "London", 1.0);
     }
 
     @Test
     public void whenCalculate_givenPartialWord_thenShouldReturnExpected() {
-        String query = "mont";
-        String name = "Montréal";
-        double expected = 0.5;
-        double actual = underTest.calculate(query, name);
-        assertThat(actual).isEqualTo(expected);
+        executeTest("mont", "Montréal", 0.5);
     }
 
     @Test
     public void whenCalculate_givenNotSameWord_thenShouldReturnExpected() {
-        String query = "mont";
-        String name = "Quebec";
-        double expected = 0.0;
+        executeTest("mont", "Quebec", 0.0);
+    }
+
+    @Test
+    public void whenCalculate_givenWordWithGreaterLength_thenShouldReturnExpected() {
+        executeTest("almaq", "Alma", 0.8);
+    }
+
+    private void executeTest(String query, String name, double expected) {
         double actual = underTest.calculate(query, name);
         assertThat(actual).isEqualTo(expected);
     }

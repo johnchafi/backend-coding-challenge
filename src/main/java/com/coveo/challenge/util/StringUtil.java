@@ -6,9 +6,9 @@ import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 public class StringUtil {
 
-    public static int longestLength (String str1, String str2) {
-        int length1 = length(str1);
-        int length2 = length(str2);
+    public static Integer longestLength (String str1, String str2) {
+        Integer length1 = length(str1);
+        Integer length2 = length(str2);
         return length1 >= length2 ? length1 : length2;
     }
 
