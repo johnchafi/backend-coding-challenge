@@ -19,13 +19,14 @@ public class NameScoreCalculatorTest {
     }
 
     @Test
-    public void whenCalculate_givenNotSameWord_thenShouldReturnExpected() {
+    public void whenCalculate_givenNotSameWord_thenShouldReturnZero() {
         executeTest("mont", "Quebec", 0.0);
+        executeTest("Londo", "Lancaster", 0.0);
     }
 
     @Test
     public void whenCalculate_givenWordWithGreaterLength_thenShouldReturnExpected() {
-        executeTest("Montreal", "mont", 0.5);
+        executeTest("Londont", "London", 0.0);
     }
 
     private void executeTest(String query, String name, double expected) {

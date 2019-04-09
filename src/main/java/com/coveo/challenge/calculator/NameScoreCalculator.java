@@ -18,13 +18,14 @@ public class NameScoreCalculator {
             return 1.0;
         }
 
-        String commonPrefix = getCommonPrefix(normalizedQuery, normalizedName);
-        if (isNotBlank(commonPrefix)) {
-            Double score = length(commonPrefix) / StringUtil.longestLength(normalizedQuery, normalizedName).doubleValue();
-            return round(score, 2);
+        if(startsWith(normalizedName, normalizedQuery)) {
+            String commonPrefix = getCommonPrefix(normalizedQuery, normalizedName);
+            if (isNotBlank(commonPrefix)) {
+                Double score = length(commonPrefix) / StringUtil.longestLength(normalizedQuery, normalizedName).doubleValue();
+                return round(score, 2);
+            }
         }
 
         return 0.0;
     }
-
 }
