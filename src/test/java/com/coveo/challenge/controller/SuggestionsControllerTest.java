@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 
@@ -37,9 +38,9 @@ public class SuggestionsControllerTest {
         Suggestions expected = mock(Suggestions.class);
         when(suggestionsService.call(VALID_QUERY, VALID_LATITUDE, VALID_LONGITUDE)).thenReturn(expected);
 
-        Suggestions actual = underTest.getSuggestions(VALID_QUERY, VALID_LATITUDE, VALID_LONGITUDE);
+        ResponseEntity<Suggestions> actual = underTest.getSuggestions(VALID_QUERY, VALID_LATITUDE, VALID_LONGITUDE);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.getBody()).isEqualTo(expected);
         verify(suggestionsService).call(VALID_QUERY, VALID_LATITUDE, VALID_LONGITUDE);
     }
 }

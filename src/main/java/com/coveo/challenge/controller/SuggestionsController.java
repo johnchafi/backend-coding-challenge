@@ -2,7 +2,6 @@ package com.coveo.challenge.controller;
 
 import com.coveo.challenge.model.Suggestions;
 import com.coveo.challenge.service.SuggestionsService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.xml.ws.Response;
 
 @RestController
 @Validated
@@ -34,9 +32,9 @@ public class SuggestionsController {
             @ApiImplicitParam(name = "longitude", value = "Longitude of caller's location")
     })
     @RequestMapping(value = "/suggestions", method = RequestMethod.GET)
-    public Suggestions getSuggestions(@RequestParam(value = "q") String query,
+    public ResponseEntity<Suggestions> getSuggestions(@RequestParam(value = "q") String query,
                                                       @RequestParam(value = "latitude", required = false) @Min(-90l) @Max(90l) Double latitude,
                                                       @RequestParam(value = "longitude", required =  false) @Min(-180l) @Max(180l) Double longitude) throws Exception {
-        return suggestionsService.call(query, latitude, longitude);
+        return ResponseEntity.ok(suggestionsService.call(query, latitude, longitude));
     }
 }
