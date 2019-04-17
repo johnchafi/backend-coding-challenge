@@ -12,7 +12,7 @@ public class ResourceProviderTest {
     public static final String RESOURCE_NOT_FOUND = "not_found.txt";
     public static final String RESOURCE_FOUND = "data/existing_resource.tsv";
 
-    private ResourceProvider underTest = new ResourceProvider();
+    private final ResourceProvider underTest = new ResourceProvider();
 
     @Test
     public void whenResourceAsStream_givenResourceNotFound_thenShouldReturnNull() {

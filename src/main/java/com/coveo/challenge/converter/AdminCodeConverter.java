@@ -4,7 +4,6 @@ import com.coveo.challenge.model.AdminCode;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.equalsAny;
 
@@ -17,9 +16,8 @@ public class AdminCodeConverter implements Converter<String, AdminCode> {
 
     @Override
     public AdminCode convertToY(String value) {
-        Optional<AdminCode> adminCodeFound = Arrays.stream(AdminCode.values())
+        return Arrays.stream(AdminCode.values())
                 .filter(v -> equalsAny(value, v.getCode(), v.getFullName()))
-                .findAny();
-        return adminCodeFound.isPresent() ? adminCodeFound.get() : null;
+                .findAny().orElse(null);
     }
 }

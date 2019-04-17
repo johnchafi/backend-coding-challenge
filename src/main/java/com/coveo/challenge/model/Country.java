@@ -8,8 +8,8 @@ public enum Country {
     CA("CA", "Canada"),
     US("US", "United States");
 
-    private String code;
-    private String fullName;
+    private final String code;
+    private final String fullName;
 
     Country(String code, String fullName) {
         this.code = code;

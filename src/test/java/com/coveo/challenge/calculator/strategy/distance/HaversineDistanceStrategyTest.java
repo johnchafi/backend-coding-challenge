@@ -10,7 +10,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class HaversineDistanceStrategyTest {
 
-    private DistanceStrategy underTest = new HaversineDistanceStrategy();
+    private final DistanceStrategy underTest = new HaversineDistanceStrategy();
 
     @Test
     public void whenCalculate_givenTwoPoints_thenShouldReturnExpectedDistance() {

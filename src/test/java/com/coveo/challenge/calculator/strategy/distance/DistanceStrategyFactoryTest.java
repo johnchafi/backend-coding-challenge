@@ -6,7 +6,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class DistanceStrategyFactoryTest {
 
-    private DistanceStrategyFactory underTest = new DistanceStrategyFactory();
+    private final DistanceStrategyFactory underTest = new DistanceStrategyFactory();
 
     @Test(expected = IllegalArgumentException.class)
     public void whenGetStrategy_givenInvalidStrategy_thenShouldThrowException() {

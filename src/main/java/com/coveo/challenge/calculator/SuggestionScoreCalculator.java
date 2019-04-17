@@ -10,11 +10,16 @@ import static org.apache.commons.math3.util.Precision.round;
 @Component
 public class SuggestionScoreCalculator {
 
-    @Autowired
-    private NameScoreCalculator nameScoreCalculator;
+    private final NameScoreCalculator nameScoreCalculator;
+
+    private final DistanceScoreCalculator distanceScoreCalculator;
 
     @Autowired
-    private DistanceScoreCalculator distanceScoreCalculator;
+    public SuggestionScoreCalculator(NameScoreCalculator nameScoreCalculator,
+                                     DistanceScoreCalculator distanceScoreCalculator) {
+        this.nameScoreCalculator = nameScoreCalculator;
+        this.distanceScoreCalculator = distanceScoreCalculator;
+    }
 
     public double calculate(String searchWord, Double searchLatitude, Double searchLongitude, City city) {
         double totalScore = nameScoreCalculator.calculate(searchWord, city.getName());

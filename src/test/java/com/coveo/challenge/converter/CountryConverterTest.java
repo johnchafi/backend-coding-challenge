@@ -9,7 +9,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class CountryConverterTest {
 
-    private CountryConverter underTest = new CountryConverter();
+    private final CountryConverter underTest = new CountryConverter();
 
     @Test
     public void whenConvertToY_givenCountryCodes_thenShouldReturnExpectedCountry() {

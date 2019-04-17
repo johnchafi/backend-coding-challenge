@@ -1,10 +1,6 @@
 package com.coveo.challenge.model;
 
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Arrays;
-import java.util.Optional;
 
 @Getter
 public enum AdminCode {
@@ -76,8 +72,8 @@ public enum AdminCode {
     PENNSYLVANIA("PA", "Pennsylvania"),
     VIRGINIA("VA", "Virginia");
 
-    private String code;
-    private String fullName;
+    private final String code;
+    private final String fullName;
 
     AdminCode(String code, String fullName) {
         this.code = code;

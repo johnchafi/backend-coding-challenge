@@ -20,8 +20,12 @@ import javax.validation.constraints.Min;
 @Validated
 public class SuggestionsController {
 
+    private final SuggestionsService suggestionsService;
+
     @Autowired
-    private SuggestionsService suggestionsService;
+    public SuggestionsController(SuggestionsService suggestionsService) {
+        this.suggestionsService = suggestionsService;
+    }
 
     @ApiOperation(
             value = "Provides suggestions for large cities"
@@ -33,8 +37,8 @@ public class SuggestionsController {
     })
     @RequestMapping(value = "/suggestions", method = RequestMethod.GET)
     public ResponseEntity<Suggestions> getSuggestions(@RequestParam(value = "q") String query,
-                                                      @RequestParam(value = "latitude", required = false) @Min(-90l) @Max(90l) Double latitude,
-                                                      @RequestParam(value = "longitude", required =  false) @Min(-180l) @Max(180l) Double longitude) throws Exception {
+                                                      @RequestParam(value = "latitude", required = false) @Min(-90L) @Max(90L) Double latitude,
+                                                      @RequestParam(value = "longitude", required =  false) @Min(-180L) @Max(180L) Double longitude) throws Exception {
         return ResponseEntity.ok(suggestionsService.call(query, latitude, longitude));
     }
 }

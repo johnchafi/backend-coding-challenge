@@ -6,7 +6,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class NameScoreCalculatorTest {
 
-    private NameScoreCalculator underTest = new NameScoreCalculator();
+    private final NameScoreCalculator underTest = new NameScoreCalculator();
 
     @Test
     public void whenCalculate_givenSameWord_thenShouldReturnExpected() {

@@ -14,18 +14,17 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LineParserTest {
+public class CityLineParserTest {
 
     private final static String LINE_WITHOUT_ALT_NAMES = "5882142\tActon Vale\tActon Vale\t\t45.65007\t-72.56582\tP\tPPL\tCA\t\t10\t16\t\t\t5135\t\t90\tAmerica/Montreal\t2008-04-11";
     private final static String LINE_WITH_ALT_NAMES = "5884083\tAlma\tAlma\tAl'ma,Alma,YTF,alma,alma, kbk,alma, kybk,Алма,Альма,آلما,آلما، کبک,ألما، كيبك\t48.55009\t-71.6491\tP\tPPL\tCA\t\t10\t02\t\t\t29526\t\t90\tAmerica/Montreal\t2010-01-29";
 
     @InjectMocks
-    private LineParser underTest;
+    private CityLineParser underTest;
 
     @Mock
     private CountryConverter countryConverter;

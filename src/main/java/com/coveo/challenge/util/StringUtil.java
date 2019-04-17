@@ -1,8 +1,6 @@
 package com.coveo.challenge.util;
 
 import static org.apache.commons.lang3.StringUtils.*;
-import static org.apache.commons.lang3.StringUtils.normalizeSpace;
-import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 public class StringUtil {
 
@@ -17,11 +15,12 @@ public class StringUtil {
             return "";
         }
 
-        String normalizedStr = " " + upperCase(str == null ? "" : str) + " ";
+        String normalizedStr = " " + upperCase(str) + " ";
         normalizedStr = stripAccents(normalizedStr);
 
         if (isNotBlank(normalizedStr)) {
-            normalizedStr = normalizedStr.replaceAll("[-\\.,]", "");
+            //normalizedStr = normalizedStr.replaceAll("[-\\.,]", "");
+            normalizedStr = normalizedStr.replaceAll("[-.,]", "");
             normalizedStr = normalizedStr.replaceAll("'", "");
             normalizedStr = normalizedStr.replaceAll("[^a-zA-Z\\s]", "");
             normalizedStr = normalizedStr.replaceAll("\\s[a-z]\\s", "");

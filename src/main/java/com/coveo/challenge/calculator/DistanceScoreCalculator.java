@@ -13,8 +13,12 @@ public class DistanceScoreCalculator {
 
     private static final double DISTANCE_THRESHOLD = 200.0;
 
+    private final DistanceStrategyFactory distanceStrategyFactory;
+
     @Autowired
-    private DistanceStrategyFactory distanceStrategyFactory;
+    public DistanceScoreCalculator(DistanceStrategyFactory distanceStrategyFactory) {
+        this.distanceStrategyFactory = distanceStrategyFactory;
+    }
 
     public double calculate(Point start, Point end) {
         DistanceStrategy distanceStrategy = distanceStrategyFactory.getStrategy(DistanceStrategyFactory.HAVERSINE);
